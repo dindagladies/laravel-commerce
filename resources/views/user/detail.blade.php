@@ -1,42 +1,54 @@
 <!-- Menghubungkan dengan view template master -->
 @extends('layout.master')
 <!-- judul halaman -->
-<!-- @section('judul_halaman', 'Halaman Home') -->
-<!--  -->
-<!-- Konten Halaman -->
+@section('judul_halaman', 'Halaman Home')
+<!-- konten -->
 @section('konten')
-    <!-- banner -->
+    <!-- breadcumb -->
     <div class="container mt-5">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/index">Home</a></li>
+                <li class="breadcrumb-item"><a href="/detail">Detail</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nama pakaian</li>
             </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img src="https://restapi.ganda.my.id/file/FILE-20201113055.jpg" class="d-block w-100" alt="..." style="height: 402px; object-fit: cover; object-position: center center; cursor: pointer;">
-                </div>
-                <div class="carousel-item">
-                <img src="https://restapi.ganda.my.id/file/FILE-20201113056.jpg" class="d-block w-100" alt="..." style="height: 402px; object-fit: cover; object-position: center center; cursor: pointer;">
-                </div>
-                <div class="carousel-item">
-                <img src="https://restapi.ganda.my.id/file/FILE-20201113057.jpg" class="d-block w-100" alt="..." style="height: 402px; object-fit: cover; object-position: center center; cursor: pointer;">
+        </nav>
+    </div>
+    <!-- Detail -->
+    <div class="container">
+        <h3 class="text-left">Nuber Fireweed Boyfriend Jeans Hitam</h3>
+        <div class="row">
+            <div class="col-md-3 mr-10">
+                <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" alt="" style="width:100%">
+            </div>
+            <div class="col-md-9">
+                <table>
+                    <tr class="text-left">
+                        <td width="10%">Harga</td>
+                        <td width="10%"></td>
+                        <td width="80%"><h3>Rp. 105.000</h3></td>
+                    </tr>
+                    <tr class="text-left">
+                        <td width="10%">Deskripsi</td>
+                        <td width="10%"></td>
+                        <td width="80%">
+                            <p>SKU (simple) 1D4B9AA9506FDDGS Warna navy blue Petunjuk Perawata Cuci terpisah Gunakan detergen yang lembut Jangan diputar dalam mesin cuci saat pengeringan Jangan gunakan pemutih Setrika suhu rendah Material fleace</p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary">Tambahkan Favorit</button>
+                        <button class="btn btn-primary">Masukan Ke Keranjang</button>
+                    </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
     </div>
-    <!-- card konten -->
+    <!-- Other Product -->
     <div class="container mt-5">
-        <h3 class="text-left mb-3">Produk Terbaru</h3>
+    <hr>
+        <h3 class="text-left mb-3">Produk Lainnya</h3>
         <div class="row">
             <div class="col-md-3">
                 <div class="card hover" style="heigh:100%">

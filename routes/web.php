@@ -25,6 +25,8 @@ Route::get('/register/proses', 'RegisterController@proses');
 
 // User
 Route::get('/index', 'user\IndexController@index');
+Route::get('/detail', 'user\DetailController@index');
+Route::get('/cart', 'user\CartController@index');
 
 // Admin
 Route::get('/admin', 'AdminController@index');

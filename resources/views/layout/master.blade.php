@@ -8,14 +8,20 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>Dashboard User</title>
+        <title>G-Commerce</title>
+        <style>
+        .hover {
+            box-shadow : 10px 10px 9px -5px rgb(0 0 0 / 10%);
+            cursor : pointer;
+        }
+        </style>
     </head>
     <body>
         <div class="card text-center">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <!-- logo -->
-                    <h2>Laravel Commerce</h2>
+                    <h2>G-Commerce</h2>
                     <!-- search -->
                     <div style="width:600px">
                         <div class="input-group" style="width:100%">
