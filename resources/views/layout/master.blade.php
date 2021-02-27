@@ -33,7 +33,7 @@
                             </select>
                             <div class="input-group-append" style="font-size:18px;">
                                 <button class="btn btn-sm btn-warning" type="button">
-                                    <i class="material-icons" style="font-size:18px;" >search</i>
+                                    <i class="material-icons text-white" style="font-size:18px;" >search</i>
                                 </button>
                             </div>
                         </div>
@@ -42,11 +42,11 @@
                     <ul class="nav justify-content-end">
                         <li class="nav-item mr-2">
                             <button type="button" class="btn btn-md btn-warning">
-                                <i class="material-icons" style="font-size:18px;" >add_shopping_cart</i>
+                                <i class="material-icons text-white" style="font-size:18px;" >add_shopping_cart</i>
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button type="button" class="btn btn-md btn-warning">Login / Register</button>
+                            <button type="button" class="btn btn-md btn-warning text-white">Login / Register</button>
                         </li>
                     </ul>
                 </div>

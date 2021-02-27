@@ -25,8 +25,13 @@ Route::get('/register/proses', 'RegisterController@proses');
 
 // User
 Route::get('/index', 'user\IndexController@index');
+Route::get('/user/profile', 'user\IndexController@profile');
+Route::get('/user/order_history', 'user\IndexController@order_history');
+Route::get('/user/address', 'user\IndexController@address');
+Route::get('/user/product_favorite', 'user\IndexController@product_favorite');
 Route::get('/detail', 'user\DetailController@index');
 Route::get('/cart', 'user\CartController@index');
+Route::get('/checkout', 'user\CheckoutController@index');
 
 // Admin
 Route::get('/admin', 'AdminController@index');

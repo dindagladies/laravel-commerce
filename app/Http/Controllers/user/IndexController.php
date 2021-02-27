@@ -11,4 +11,20 @@ class IndexController extends Controller
     public function index(){
         return view('user/index');
     }
+
+    // profile page
+    public function profile(){
+        return view('user/profile');
+    }
+
+    // order history page
+    public function order_history(){
+        return view('user/order_history');
+    }
+
+    // address
+    public function address(){
+        return view('user/address');
+    }
+
 }
