@@ -7,7 +7,7 @@
     <div class="card" style="width: 400px; margin:15px">
         <div class="card-body">
             <form action="/login/proses" method="post">
-                <h3 class="text-center">Login</h3>
+                <h3 class="text-center">Register</h3>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -17,9 +17,9 @@
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
-                <a href="/forgot">Forgot Password?</a> |
-                <a href="/register">Sign Up</a>
-                <a href="/login/proses" class="btn btn-primary float-right">Sign In</a>
+                Sudah punya akun ? |
+                <a href="/login">Sign In</a>
+                <a href="/login/proses" class="btn btn-primary float-right">Sign Up</a>
                 <!-- <button class="btn btn-primary float-right" type="submit">Login</button> -->
             </form>
         </div>

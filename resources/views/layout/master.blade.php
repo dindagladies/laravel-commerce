@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>G-Commerce</title>
         <style>
-        .hover {
+        .hover:hover {
             box-shadow : 10px 10px 9px -5px rgb(0 0 0 / 10%);
             cursor : pointer;
         }
@@ -18,10 +18,10 @@
     </head>
     <body>
         <div class="card text-center">
-            <div class="card-header">
+            <div class="card-header bg-white">
                 <div class="d-flex justify-content-between">
                     <!-- logo -->
-                    <h2>G-Commerce</h2>
+                    <h2><a href="/index" class="text-dark">G-Commerce</a></h2>
                     <!-- search -->
                     <div style="width:600px">
                         <div class="input-group" style="width:100%">
@@ -52,9 +52,11 @@
                 </div>
             </div>
             <!-- konten -->
-            @yield('konten')
+            <div class="bg-light p-3">
+                @yield('konten')
+            </div>
             <!-- /konten -->
-            <div class="card-footer text-muted mt-5">
+            <div class="card-footer text-muted">
                 Support by bootstrap
             </div>
         </div>

@@ -27,4 +27,9 @@ class IndexController extends Controller
         return view('user/address');
     }
 
+    // produk favorite
+    public function product_favorite(){
+        return view('user/product_favorite');
+    }
+
 }

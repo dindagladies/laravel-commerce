@@ -4,7 +4,7 @@
 <!-- Konten Halaman -->
 @section('konten')
     <!-- breadcumb -->
-    <div class="container mt-5">
+    <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/index">Home</a></li>
