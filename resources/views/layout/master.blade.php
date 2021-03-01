@@ -41,12 +41,14 @@
                     <!-- button -->
                     <ul class="nav justify-content-end">
                         <li class="nav-item mr-2">
-                            <button type="button" class="btn btn-md btn-warning">
+                            <a href="/cart" class="btn btn-md btn-warning">
                                 <i class="material-icons text-white" style="font-size:18px;" >add_shopping_cart</i>
-                            </button>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <button type="button" class="btn btn-md btn-warning text-white">Login / Register</button>
+                            <a href="/login" class="btn btn-md btn-warning text-white">
+                                Login / Register
+                            </a>
                         </li>
                     </ul>
                 </div>
