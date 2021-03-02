@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // login page
 Route::get('/login', 'LoginController@index');
@@ -23,15 +23,23 @@ Route::get('/login/proses', 'LoginController@proses');
 Route::get('/register', 'RegisterController@index');
 Route::get('/register/proses', 'RegisterController@proses');
 
-// User
+// halalam commerce
 Route::get('/', 'user\IndexController@index');
+// User
+Route::get('/user', 'user\IndexController@index');
 Route::get('/user/profile', 'user\IndexController@profile');
 Route::get('/user/order_history', 'user\IndexController@order_history');
 Route::get('/user/address', 'user\IndexController@address');
 Route::get('/user/product_favorite', 'user\IndexController@product_favorite');
-Route::get('/detail', 'user\DetailController@index');
 Route::get('/cart', 'user\CartController@index');
 Route::get('/checkout', 'user\CheckoutController@index');
 
+// product
+Route::get('/detail/{id}', 'user\DetailController@index');
+Route::post('/detail/proses', 'user\DetailController@proses'); //add product
 // Admin
 Route::get('/admin', 'AdminController@index');
+
+// home
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');

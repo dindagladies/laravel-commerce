@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <!-- button -->
-                    <ul class="nav justify-content-end">
+                    <!-- <ul class="nav justify-content-end">
                         <li class="nav-item mr-2">
                             <a href="/cart" class="btn btn-md btn-warning">
                                 <i class="material-icons text-white" style="font-size:18px;" >add_shopping_cart</i>
@@ -50,7 +50,43 @@
                                 Login / Register
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
+                    <!-- Authentication Links -->
+                    <ul class="nav justify-content-end">
+                        @if (Auth::guest())
+                            <li class="nav-item mr-2">
+                                <a href="{{ route('login') }}" class="btn btn-md btn-warning text-white">
+                                    Login
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('register') }}" class="btn btn-md btn-danger text-white">
+                                    Register
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item mr-2">
+                                <a href="/cart" class="btn btn-md btn-warning">
+                                    <i class="material-icons text-white" style="font-size:18px;" >add_shopping_cart</i>
+                                </a>
+                            </li>
+                            <div class="dropdown">
+                                <a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <a class="dropdown-item mr-4" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
             <!-- konten -->

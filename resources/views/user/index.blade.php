@@ -37,79 +37,22 @@
     <!-- card konten -->
     <div class="container mt-5">
         <h3 class="text-left mb-3">Produk Terbaru</h3>
+        <!-- show data product -->
         <div class="row">
+            @foreach($products as $p)
             <div class="col-md-2">
-                <a href="/detail">
+                <a href="/detail/{{$p->id_product}}">
                     <div class="card hover">
-                        <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="card-img-top" alt="..." style="width:100%; height: 200px; object-fit:cover; object-position: center center;">
+                        <img src="{{$p->img_path}}" class="card-img-top" alt="..." style="width:100%; height: 200px; object-fit:cover; object-position: center center;">
                         <div class="card-body">
                             <a href="/detail"></a>
-                            <h6 class="card-title">Nuber Fireweed Boyfriend Jeans Hitam</h6>
-                            <p class="card-text">Rp.105.000</p>
+                            <h6 class="card-title">{{$p->product_name}}</h6>
+                            <p class="card-text">Rp.{{$p->price}}</p>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-md-2">
-                <a href="/detail">
-                    <div class="card hover">
-                        <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="card-img-top" alt="..." style="width:100%; height: 200px; object-fit:cover; object-position: center center;">
-                        <div class="card-body">
-                            <a href="/detail"></a>
-                            <h6 class="card-title">Nuber Fireweed Boyfriend Jeans Hitam</h6>
-                            <p class="card-text">Rp.105.000</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a href="/detail">
-                    <div class="card hover">
-                        <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="card-img-top" alt="..." style="width:100%; height: 200px; object-fit:cover; object-position: center center;">
-                        <div class="card-body">
-                            <a href="/detail"></a>
-                            <h6 class="card-title">Nuber Fireweed Boyfriend Jeans Hitam</h6>
-                            <p class="card-text">Rp.105.000</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a href="/detail">
-                    <div class="card hover">
-                        <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="card-img-top" alt="..." style="width:100%; height: 200px; object-fit:cover; object-position: center center;">
-                        <div class="card-body">
-                            <a href="/detail"></a>
-                            <h6 class="card-title">Nuber Fireweed Boyfriend Jeans Hitam</h6>
-                            <p class="card-text">Rp.105.000</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a href="/detail">
-                    <div class="card hover">
-                        <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="card-img-top" alt="..." style="width:100%; height: 200px; object-fit:cover; object-position: center center;">
-                        <div class="card-body">
-                            <a href="/detail"></a>
-                            <h6 class="card-title">Nuber Fireweed Boyfriend Jeans Hitam</h6>
-                            <p class="card-text">Rp.105.000</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a href="/detail">
-                    <div class="card hover">
-                        <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="card-img-top" alt="..." style="width:100%; height: 200px; object-fit:cover; object-position: center center;">
-                        <div class="card-body">
-                            <a href="/detail"></a>
-                            <h6 class="card-title">Nuber Fireweed Boyfriend Jeans Hitam</h6>
-                            <p class="card-text">Rp.105.000</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
