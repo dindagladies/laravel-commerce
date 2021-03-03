@@ -15,6 +15,13 @@
             </ol>
         </nav>
     </div>
+    <div class="container">
+        @if (session('alert'))
+            <div class="alert alert-success">
+                {{ session('alert') }}
+            </div>
+        @endif
+    </div>
     <!-- Detail -->
     <div class="container">
         <h3 class="text-left">{{$d->product_name}}</h3>
@@ -39,11 +46,15 @@
                 </table>
                 <div class="row mt-3">
                     <div class="col-md-6">
-                        <form action="/"></form>
-                        <!-- <button class="btn btn-primary">Tambahkan Favorit</button> -->
-                        <button class="btn btn-danger">
-                        <i class="material-icons text-white" style="font-size:18px;" >add_shopping_cart</i> Masukan Ke Keranjang
-                        </button>
+                        <form action="/product/store" method="post">
+                            {{ csrf_field() }}
+                            <!-- <button class="btn btn-primary">Tambahkan Favorit</button> -->
+                            <input type="hidden" value="{{Auth::user()->id}}" name="id_user">
+                            <input type="hidden" value="{{$d->id_product}}" name="id_product">
+                            <button class="btn btn-danger">
+                                <i class="material-icons text-white" type="submit" style="font-size:18px;" >add_shopping_cart</i> Masukan Ke Keranjang
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -71,4 +82,11 @@
         </div>
     </div>
     @endforeach
+    <!-- <script>
+        var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+        if(exist){
+        alert(msg);
+        }
+    </script> -->
 @endsection

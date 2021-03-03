@@ -36,7 +36,9 @@ Route::get('/checkout', 'user\CheckoutController@index');
 
 // product
 Route::get('/detail/{id}', 'user\DetailController@index');
-Route::post('/detail/proses', 'user\DetailController@proses'); //add product
+Route::post('/product/store', 'user\DetailController@store'); //add product
+// cart
+Route::get('/cart/delete/{id}', 'user\CartController@delete');
 // Admin
 Route::get('/admin', 'AdminController@index');
 
