@@ -32,16 +32,16 @@ Route::get('/user/order_history', 'user\IndexController@order_history');
 Route::get('/user/address', 'user\IndexController@address');
 Route::get('/user/product_favorite', 'user\IndexController@product_favorite');
 Route::get('/cart', 'user\CartController@index');
-Route::get('/checkout', 'user\CheckoutController@index');
 
 // product
 Route::get('/detail/{id}', 'user\DetailController@index');
 Route::post('/product/store', 'user\DetailController@store'); //add product
 // cart
 Route::get('/cart/delete/{id}', 'user\CartController@delete');
+// checkout
+Route::post('/checkout', 'user\CheckoutController@index');
 // Admin
 Route::get('/admin', 'AdminController@index');
-
 // home
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
