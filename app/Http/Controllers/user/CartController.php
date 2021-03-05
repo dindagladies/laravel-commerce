@@ -28,6 +28,9 @@ class CartController extends Controller
         return view('user/cart', ['carts' => $carts], ['products' => $products]);
     }
 
+    // proses add checkout
+    public function proses(){}
+
     // delete page
     public function delete($id){
         $id_user = Auth::id();

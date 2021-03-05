@@ -39,7 +39,9 @@ Route::post('/product/store', 'user\DetailController@store'); //add product
 // cart
 Route::get('/cart/delete/{id}', 'user\CartController@delete');
 // checkout
-Route::post('/checkout', 'user\CheckoutController@index');
+Route::get('/checkout', 'user\CheckoutController@index');
+Route::post('/checkout/store', 'user\CheckoutController@store');
+Route::post('/checkout/address', 'user\CheckoutController@address');
 // Admin
 Route::get('/admin', 'AdminController@index');
 // home

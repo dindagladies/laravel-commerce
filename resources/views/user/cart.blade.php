@@ -15,13 +15,14 @@
     <div class="container">
         <h3 class="text-left">Keranjang Belanja</h3>
         @foreach($carts as $c)
-        <form action="/checkout" method="post">
+        <form action="/checkout/store" method="post">
+            {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-8">
                     <!-- cart produk -->
                     <div class="row">
                         <div class="col-md-3 d-flex">
-                            <input type="checkbox" name="product" class="mr-1" value="{{$c->price}}" id="check" onclick="myCheck()">
+                            <input type="checkbox" name="price" class="mr-1" value="{{$c->price}}" id="check" onclick="myCheck()">
                             <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="img-thumbnail" alt="">
                         </div>
                         <div class="col-md-9">
