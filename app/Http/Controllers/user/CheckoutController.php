@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
-    // checkout
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    // checkout page
     public function index(){
         // id user
         $id_user = Auth::id();
@@ -22,12 +26,20 @@ class CheckoutController extends Controller
         // data jenis pembayaran
         $payments= DB::table('payments')->get();
         // data checkout
-        $checkout = DB::table('product_choosed')
+        $checkouts = DB::table('product_choosed')
                     ->join('checkouts', 'product_choosed.id_checkout', '=', 'checkouts.id_checkout')
                     ->where('checkouts.id_user', $id_user)
                     ->get();
+        // get data delivery services
+        $services = DB::table('delivery_services')->get();
         // return $checkout;
-        return view('/user/checkout', ['checkouts' => $checkout],['payments' => $payments], ['address' => $address]);
+        // return view('/user/checkout', ['checkouts' => $checkouts],['payments' => $payments], ['address' => $address]);
+        return view('/user/checkout', [
+            'checkouts' => $checkouts, 
+            'address' => $address,
+            'payments' => $payments,
+            'services' => $services
+        ]);
     }
 
     // store data checkout
@@ -90,16 +102,22 @@ class CheckoutController extends Controller
         return redirect('/checkout');
     }
 
-    // store checkout data
-    public function update(Request $request){
+    // proses data checkout
+    public function proses(Request $request){
         $id_user = Auth::id();
-        DB::table('checkouts')->insert([
-            'id_user' => $id_user,
-            'id_address' => $request->id_address,
-            'total' => $request->total,
-            'status' => 'pending'
+        $id_checkout = $request->id_checkout;
+        DB::table('checkouts')
+            ->where('id_checkout', $id_checkout)
+            ->where('id_user', $id_user)
+            ->update([
+                'date' => date('Y-m-d H:i:s'),
+                'id_address' => $request->id_address,
+                'id_service' => $request->id_service,
+                'id_payment' => $request->id_payment,
+                'status' => "process"
         ]);
-        return view('/user/checkout');
+        // return view('/user');
+        return redirect('/user')->with('alert','Terimakasih telah belanja, konfirmasi pembayaran maks 24 jam !');
     }
 
     // save address

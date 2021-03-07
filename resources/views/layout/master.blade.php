@@ -76,10 +76,13 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <a class="dropdown-item mr-4" href="/user/profile">
+                                        <i class="material-icons mb-1" style="font-size:18px;" >settings</i> Settings
+                                    </a>
                                     <a class="dropdown-item mr-4" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                        Logout
+                                        <i class="material-icons" style="font-size:18px;" >logout</i> Logout
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
