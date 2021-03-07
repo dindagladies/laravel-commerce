@@ -27,14 +27,48 @@
                             <p>Telp : 000</p>
                             <p>Email : dinda@gmail.com</p>
                             <div class="row ml-1">
-                                <button class="btn btn-sm btn-warning text-white mr-3">Ubah Data Profile</button>
+                                <button class="btn btn-sm btn-warning text-white mr-3" type="submit" data-toggle="modal" data-target="#profileModal">Ubah Data Profile</button>
                                 <button class="btn btn-sm btn-danger text-white mr-3">Ganti Pasword</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">Ubah Data Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/user/profile_proses" method="post">
+                    <div class="modal-body">
+                        @foreach($users as $u)
+                        {{ csrf_field() }}
+                        <div class="form-row">
+                            <div class="col">
+                                <label>Nama Lengkap</label>
+                                <input type="text" name="name" class="form-control" placeholder="Nama" value="{{$u->name}}">
+                            </div>
+                            <div class="col">
+                                <label>Nomor HP</label>
+                                <input type="text" name="phone" class="form-control" placeholder="Nomor HP" value="{{$u->phone}}">
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
+        </div>
     </div>
 @endsection
 
