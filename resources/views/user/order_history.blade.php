@@ -42,7 +42,6 @@
                         <div class="col">
                             <div class="card">
                                 @foreach($history as $h)
-                                {{$h->id_user}}
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between  mb-3">
                                         <div>
@@ -83,12 +82,19 @@
                                             <p><b>Status Transaksi</b></p>
                                         </div>
                                         <div>
-                                            <p><b>Menunggu Pembayaran</b></p>
+                                            @if($h->status =='yes')
+                                                <p><b>Sedang Pengiriman</b></p>
+                                            @elseif($h->status =='no')
+                                                <p><b>Menunggu Pembayaran</b></p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row ml-1">
-                                        <button class="btn btn-md btn-warning text-white mr-2">Bayar Transaksi</button>
-                                        <button class="btn btn-md btn-danger mr-2">Batalkan Transaksi</button>
+                                        @if($h->status =='yes')
+                                            <button class="btn btn-md btn-warning mr-2 text-white">Cek Pengiriman</button>
+                                        @elseif($h->status =='no')
+                                            <button class="btn btn-md btn-danger text-white mr-2">Bayar Transaksi</button>
+                                        @endif
                                     </div>
                                 </div>
                                 @endforeach

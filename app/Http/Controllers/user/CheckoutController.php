@@ -113,7 +113,7 @@ class CheckoutController extends Controller
             ->where('id_checkout', $id_checkout)
             ->where('id_user', $id_user)
             ->update([
-                'date' => date('Y-m-d H:i:s'),
+                'date' => date('Y-m-d'),
                 'id_address' => $request->id_address,
                 'id_service' => $request->id_service,
                 'id_payment' => $request->id_payment,
@@ -121,8 +121,13 @@ class CheckoutController extends Controller
         ]);
         // insert data history
         DB::table('history')->insert([
-            'id_user' => $id_user,
             'id_checkout' => $id_checkout
+        ]);
+        // insert data payment status
+        DB::table('payment_status')->insert([
+            'id_checkout' => $id_checkout,
+            'id_payment' => $request->id_payment,
+            'status' => "no"
         ]);
         // insert data pengiriman
         DB::table('delivery_status')->insert([
@@ -143,6 +148,7 @@ class CheckoutController extends Controller
             'phone' => $request->phone,
             'address' => $request->address
         ]);
-        return redirect('/checkout');
+        // redirect
+        return redirect('/checkout')->with('alert','Data alamat telah ditambahkan.');
     }
 }

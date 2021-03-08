@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-between mb-2">
                         <h6 class="text-danger text-left">Alamat Pengiriman</h6>
                         <div class="form-row mt-3">
-                            <button type="submit" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#addressModal">Tambah Data</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#addressModal">Tambah Data</button>
                         </div>
                     </div>
                     <!-- <div class="row text-left"> -->
