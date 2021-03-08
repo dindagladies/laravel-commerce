@@ -29,6 +29,7 @@ class CheckoutController extends Controller
         $checkouts = DB::table('product_choosed')
                     ->join('checkouts', 'product_choosed.id_checkout', '=', 'checkouts.id_checkout')
                     ->where('checkouts.id_user', $id_user)
+                    ->where('checkouts.status', "pending")
                     ->get();
         // get data delivery services
         $services = DB::table('delivery_services')->get();
@@ -51,6 +52,7 @@ class CheckoutController extends Controller
         // add data to chekout
         DB::table('checkouts')->insert([
             'id_user' => $id_user,
+            'status' => "pending"
         ]);
         $id_checkout = DB::getPdo()->lastInsertId();;
         // === store data to product choosed ===
@@ -106,6 +108,7 @@ class CheckoutController extends Controller
     public function proses(Request $request){
         $id_user = Auth::id();
         $id_checkout = $request->id_checkout;
+        // update data checkout
         DB::table('checkouts')
             ->where('id_checkout', $id_checkout)
             ->where('id_user', $id_user)
@@ -115,6 +118,16 @@ class CheckoutController extends Controller
                 'id_service' => $request->id_service,
                 'id_payment' => $request->id_payment,
                 'status' => "process"
+        ]);
+        // insert data history
+        DB::table('history')->insert([
+            'id_user' => $id_user,
+            'id_checkout' => $id_checkout
+        ]);
+        // insert data pengiriman
+        DB::table('delivery_status')->insert([
+            'id_checkout' => $id_checkout,
+            'status' => "pending"
         ]);
         // return view('/user');
         return redirect('/user')->with('alert','Terimakasih telah belanja, konfirmasi pembayaran maks 24 jam !');

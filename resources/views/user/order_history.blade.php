@@ -41,23 +41,25 @@
                     <div class="row m-1">
                         <div class="col">
                             <div class="card">
+                                @foreach($history as $h)
+                                {{$h->id_user}}
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between  mb-3">
                                         <div>
-                                            <b>INVOICE-000001</b>
+                                            <b>INVOICE-{{$h->id_checkout}}</b>
                                         </div>
                                         <div>
-                                            <b>26/02/2021 01:24</b>
+                                            <b>{{$h->date}}</b>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="img-thumbnail mr-2" alt="" style="width: 100%; height: 100px; object-fit: contain; object-position: center center;">
+                                            <img src="{{$h->img_path}}" class="img-thumbnail mr-2" alt="" style="width: 100%; height: 100px; object-fit: contain; object-position: center center;">
                                         </div>
                                         <div class="col-md-10 text-left">
-                                            <p>Nuber Fireweed Boyfriend Jeans Hitam</p>
-                                            <p>2 x Rp.105.000</p>
-                                            <p><b>Total :</b> Rp.220.000</p>
+                                            <p>{{$h->product_name}}</p>
+                                            <p>2 x Rp.{{$h->price}}</p>
+                                            <p><b>Total :</b> Rp.{{$h->total}}</p>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between">
@@ -65,7 +67,7 @@
                                             <p><b>Total Pembelian (TP) + Biaya Pengiriman (BP)</b></p>
                                         </div>
                                         <div>
-                                            <p><b>210.000(TP) + 6.000(BP)</b></p>
+                                            <p><b>{{$h->total}}(TP) + 6.000(BP)</b></p>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between">
@@ -73,7 +75,7 @@
                                             <p><b>Grand Total</b></p>
                                         </div>
                                         <div>
-                                            <p><b>216</b></p>
+                                            <p><b>{{$h->total}}</b></p>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between">
@@ -89,6 +91,7 @@
                                         <button class="btn btn-md btn-danger mr-2">Batalkan Transaksi</button>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

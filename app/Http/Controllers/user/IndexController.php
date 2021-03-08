@@ -57,18 +57,21 @@ class IndexController extends Controller
         return redirect('/user/profile')->with('alert','Data berhasil disimpan !');
     }
 
-    // change password
-    public function change_password(){
-
-    }
-
     /*
     *   HISTORY
     */
 
     // order history page
     public function order_history(){
-        return view('user/order_history');
+        $id_user = Auth::id();
+        $history = DB::table('checkouts')
+                ->where('id_user', $id_user)
+                ->join('history', 'checkouts.id_checkout', '=', 'history.id_checkout')
+                ->join('product_choosed', 'checkouts.id_checkout', '=', 'product_choosed.id_checkout')
+                ->join('payment_status', 'checkouts.id_checkout', '=', 'payment_status.id_checkout')
+                ->get();
+                
+        return view('user/order_history', ['history' => $history] );
     }
 
     /*
