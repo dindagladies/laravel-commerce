@@ -27,16 +27,16 @@ Route::get('/register/proses', 'RegisterController@proses');
 Route::get('/', 'user\IndexController@index');
 // User
 Route::get('/user', 'user\IndexController@index');
-Route::get('/user/profile', 'user\IndexController@profile');
-Route::post('/user/profile_proses', 'user\IndexController@profile_proses');
-Route::get('/user/order_history', 'user\IndexController@order_history');
-Route::get('/user/address', 'user\IndexController@address');
-Route::get('/user/product_favorite', 'user\IndexController@product_favorite');
+Route::get('/user/profile', 'user\UserController@profile');
+Route::post('/user/profile_proses', 'user\UserController@profile_proses');
+Route::get('/user/order_history', 'user\UserController@order_history');
+Route::get('/user/address', 'user\UserController@address');
+Route::get('/user/product_favorite', 'user\UserController@product_favorite');
 Route::get('/cart', 'user\CartController@index');
 
 // product
 Route::get('/detail/{id}', 'user\DetailController@index');
-Route::post('/product/store', 'user\DetailController@store'); //add product
+Route::get('/product/{id}', 'user\ProductController@index'); //add product
 // cart
 Route::get('/cart/delete/{id}', 'user\CartController@delete');
 // checkout
@@ -48,4 +48,4 @@ Route::post('/checkout/proses', 'user\CheckoutController@proses');
 Route::get('/admin', 'AdminController@index');
 // home
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

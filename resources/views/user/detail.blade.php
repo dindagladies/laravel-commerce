@@ -46,10 +46,9 @@
                 </table>
                 <div class="row mt-3">
                     <div class="col-md-6">
-                        <form action="/product/store" method="post">
+                        <form action="/product/{{$d->id_product}}" method="get">
                             {{ csrf_field() }}
                             <!-- <button class="btn btn-primary">Tambahkan Favorit</button> -->
-                            <input type="hidden" value="{{Auth::user()->id}}" name="id_user">
                             <input type="hidden" value="{{$d->id_product}}" name="id_product">
                             <button class="btn btn-danger">
                                 <i class="material-icons text-white" type="submit" style="font-size:18px;" >add_shopping_cart</i> Masukan Ke Keranjang
