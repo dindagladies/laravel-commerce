@@ -22,7 +22,7 @@
             <div class="card-header bg-white">
                 <div class="d-flex justify-content-between">
                     <!-- logo -->
-                    <h2><a href="/index" class="text-dark">G-Commerce</a></h2>
+                    <h2><a href="/" class="text-dark">G-Commerce</a></h2>
                     <!-- search -->
                     <div style="width:600px">
                         <div class="input-group" style="width:100%">

@@ -14,15 +14,15 @@
     <!-- content -->
     <div class="container">
         <h3 class="text-left">Keranjang Belanja</h3>
-        @foreach($carts as $c)
         <form action="/checkout/store" method="post">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-8">
                     <!-- cart produk -->
+                    @foreach($carts as $c)
                     <div class="row">
                         <div class="col-md-3 d-flex">
-                            <input type="checkbox" name="price" class="mr-1" value="{{$c->price}}" id="check" onclick="myCheck()">
+                            <input type="checkbox" name="price" class="mr-1" value="{{$c->price}}" onclick="myCheck()" id="check">
                             <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="img-thumbnail" alt="">
                         </div>
                         <div class="col-md-9">
@@ -32,13 +32,16 @@
                             <table width=100%>
                                 <tr>
                                     <td class="text-left"><b>Rp.{{$c->price}}</b></td>
+                                    <input type="hidden" id="harga" onkeyup="sum();" value="{{$c->price}}">
                                 </tr>
                                 <tr>
                                     <td width="30%" class="text-left">
                                         <input type="hidden" value="{{$c->id_product}}" name="id_product">
-                                        <input class="form-control" type="number" name="total" value="1" style="max-width:80px">
+                                        <input class="form-control" id="total"  type="number" name="total" value="1" style="max-width:80px" onkeyup="sum();">
                                     </td>
-                                    <td width="30%" class="text-right"><b>Rp.{{$c->price * 1}}</b></td>
+                                    <td width="30%" class="text-right font-weight-bold">
+                                        Rp.<span id="total_harga">{{$c->price * 1}}</span>
+                                    </td>
                                     <td width="40%" class="text-left" >
                                         <a href="/cart/delete/{{$c->id_cart}}" class="btn btn-sm btn-danger ml-3">
                                             <i class="material-icons" style="font-size:18px;">delete_forever</i>
@@ -48,6 +51,7 @@
                             </table>
                         </div>
                     </div>
+                    @endforeach
                     <!-- ==== pemesanan =======-->
                         <!-- <hr>
                         <h3 class="text-left">Opsi Pengiriman</h3>
@@ -103,10 +107,8 @@
                 </div>
             </div>
         </form>
-        @endforeach
     </div>
     <script>
-        // checkbox function
         function myCheck(){
             // get checkbox
             var checkbox = document.getElementById("check");
@@ -123,8 +125,14 @@
             }
         }
 
-        // $( "input" ).on( "click", function() {
-        //     $( "#text" ).html( $( "input:checked" ).val() + " is checked!" );
-        // });
+        // itung total harga
+        function sum(){
+            var harga = document.getElementById('harga').value;
+            var total = document.getElementById('total').value;
+            var result = parseInt(harga) * parseInt(total);
+            if(!isNaN(result)){
+                document.getElementById('total_harga').innerHTML = result;
+            }
+        }
     </script>
 @endsection

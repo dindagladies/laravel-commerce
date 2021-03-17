@@ -38,6 +38,6 @@ class CartController extends Controller
             ->where('id_cart', $id, 'id_user'. $id_user)
             ->delete();
         // redirect
-        return redirect('/cart');
+        return redirect('/cart')->with('alert','Data telah dihapus.');
     }
 }
