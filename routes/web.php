@@ -33,6 +33,7 @@ Route::get('/user/order_history', 'user\UserController@order_history');
 Route::get('/user/address', 'user\UserController@address');
 Route::get('/user/product_favorite', 'user\UserController@product_favorite');
 Route::get('/cart', 'user\CartController@index');
+Route::post('/cart/change_total', 'user\CartController@change_total');
 
 // product
 Route::get('/detail/{id}', 'user\DetailController@index');
@@ -41,7 +42,7 @@ Route::get('/product/{id}', 'user\ProductController@index'); //add product
 Route::get('/cart/delete/{id}', 'user\CartController@delete');
 // checkout
 Route::get('/checkout', 'user\CheckoutController@index');
-Route::post('/checkout/store', 'user\CheckoutController@store');
+Route::get('/checkout/store', 'user\CheckoutController@store');
 Route::post('/checkout/address', 'user\CheckoutController@address');
 Route::post('/checkout/proses', 'user\CheckoutController@proses');
 // Admin

@@ -70,7 +70,7 @@
                                 <div class="card-header bg-primary text-white">
                                     {{$s->category}}
                                     <!-- Reguler -->
-                                </div>
+                                </div> 
                                 <div class="card-body text-left">
                                     <input type="radio" name="id_service" <?php if (isset($c) && $s=="{{$c->id_service}}") echo "checked";?> value="{{$s->id_service}}">
                                     {{$s->service_name}} ({{$s->price}})
@@ -87,7 +87,6 @@
                     <div class="card mb-3 border-warning">
                         <div class="card-header text-white bg-warning">Ringkasan Pemesanan</div>
                         <div class="card-body">
-                                <!-- {{$c->product_name}} -->
                             <input type="hidden" name="id_checkout" name="id_checkout" value="{{$c->id_checkout}}">
                             <!-- Pengiriman -->
                             <div class="row">
@@ -95,16 +94,27 @@
                                     <p class="card-text text-left">Total</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text text-right">Rp. 220.000</p>
+                                    <p class="card-text text-right">{{$c->grand_total}}</p>
                                 </div>
                             </div>
-                            <!-- total -->
+                            <!-- biaya admin -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <p class="card-text text-left">Biaya Admin</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text text-right">Rp. 0</p>
+                                    <p class="card-text text-right">1000</p>
+                                </div>
+                            </div>
+                            <!-- biaya pengiriman -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-text text-left">Pengiriman</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text text-right" id="pengiriman">
+                                        0
+                                    </p>
                                 </div>
                             </div>
                             <hr>
@@ -114,7 +124,7 @@
                                     <p class="card-text text-left"><b>Grand Total</b></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text text-right">Rp. {{$c->total}}</p>
+                                    <p class="card-text text-right">Rp. {{$c->grand_total}}</p>
                                 </div>
                             </div>
                             <!-- checkout -->

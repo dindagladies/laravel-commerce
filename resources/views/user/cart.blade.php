@@ -14,15 +14,15 @@
     <!-- content -->
     <div class="container">
         <h3 class="text-left">Keranjang Belanja</h3>
-        <form action="/checkout/store" method="post">
-            {{ csrf_field() }}
-            <div class="row">
-                <div class="col-md-8">
-                    <!-- cart produk -->
-                    @foreach($carts as $c)
+        <div class="row">
+            <div class="col-md-8">
+                <!-- cart produk -->
+                @forelse($carts as $c)
+                <form action="/cart/change_total" method="post" onchange="this.form.submit();">
+                    {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-3 d-flex">
-                            <input type="checkbox" name="price" class="mr-1" value="{{$c->price}}" onclick="myCheck()" id="check">
+                            <!-- <input type="checkbox" name="price" class="mr-1" value="{{$c->price}}" onclick="myCheck()" id="check"> -->
                             <img src="https://restapi.ganda.my.id/file/small_FILE-20201113058.jpg" class="img-thumbnail" alt="">
                         </div>
                         <div class="col-md-9">
@@ -32,15 +32,16 @@
                             <table width=100%>
                                 <tr>
                                     <td class="text-left"><b>Rp.{{$c->price}}</b></td>
-                                    <input type="hidden" id="harga" onkeyup="sum();" value="{{$c->price}}">
+                                    <!-- onkeyup="sum();" -->
+                                    <input type="hidden" id="harga" value="{{$c->price}}">
                                 </tr>
                                 <tr>
                                     <td width="30%" class="text-left">
                                         <input type="hidden" value="{{$c->id_product}}" name="id_product">
-                                        <input class="form-control" id="total"  type="number" name="total" value="1" style="max-width:80px" onkeyup="sum();">
+                                        <input class="form-control" id="total_item"  type="number" name="total_item" value="{{$c->total_item}}" style="max-width:80px" onkeyup="sum();">
                                     </td>
                                     <td width="30%" class="text-right font-weight-bold">
-                                        Rp.<span id="total_harga">{{$c->price * 1}}</span>
+                                        Rp.<span id="total_harga">{{$c->total_harga}}</span>
                                     </td>
                                     <td width="40%" class="text-left" >
                                         <a href="/cart/delete/{{$c->id_cart}}" class="btn btn-sm btn-danger ml-3">
@@ -51,64 +52,71 @@
                             </table>
                         </div>
                     </div>
-                    @endforeach
-                    <!-- ==== pemesanan =======-->
-                        <!-- <hr>
-                        <h3 class="text-left">Opsi Pengiriman</h3>
-                        <h6 class="text-left">Silahkan pilih salah satu jenis pengiriman yang Anda inginkan</h6>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-header bg-primary text-white">
-                                        Reguler
-                                    </div>
-                                    <div class="card-body text-left">
-                                        <input type="radio" name="pengiriman" value="">
-                                        J&T Expres (Rp.10.000)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-header bg-danger text-white">
-                                        Instant
-                                    </div>
-                                    <div class="card-body text-left">
-                                        <input type="radio" name="pengiriman" value="">
-                                        Shopee (Rp.100.000)
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                    <!-- ==== pemesanan =======-->
+                </form>
+                @empty
+                <div class="d-flex">
+                        <p>Belum ada data yang tersedia</p>
                 </div>
-                <!-- ringkasan pemersanan -->
-                <div class="col-md-4">
-                    <div class="card mb-3 border-warning">
-                        <div class="card-header text-white bg-warning">Ringkasan Pemesanan</div>
-                        <div class="card-body">
-                            <!-- total -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p class="card-text text-left"><b>Total</b></p>
+                @endforelse
+                <!-- ==== pemesanan =======-->
+                    <!-- <hr>
+                    <h3 class="text-left">Opsi Pengiriman</h3>
+                    <h6 class="text-left">Silahkan pilih salah satu jenis pengiriman yang Anda inginkan</h6>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    Reguler
                                 </div>
-                                <div class="col-md-6">
-                                    <p class="card-text text-right" id="text" style="display:none">
-                                        Rp. 220.000
-                                    </p>
+                                <div class="card-body text-left">
+                                    <input type="radio" name="pengiriman" value="">
+                                    J&T Expres (Rp.10.000)
                                 </div>
                             </div>
-                            <!-- checkout -->
-                            <button class="btn btn-block btn-warning mt-3 text-white" type="submit">
-                                Checkout
-                            </button>
                         </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header bg-danger text-white">
+                                    Instant
+                                </div>
+                                <div class="card-body text-left">
+                                    <input type="radio" name="pengiriman" value="">
+                                    Shopee (Rp.100.000)
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                <!-- ==== pemesanan =======-->
+            </div>
+            <!-- ringkasan pemersanan -->
+            <div class="col-md-4">
+                <div class="card mb-3 border-warning">
+                    <div class="card-header text-white bg-warning">Ringkasan Pemesanan</div>
+                    <div class="card-body">
+                        <!-- total -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-text text-left"><b>Total</b></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="card-text text-right" id="text">
+                                    @foreach($grand as $g)
+                                        Rp . {{$g}}
+                                    @endforeach
+                                </p>
+                            </div>
+                        </div>
+                        <!-- checkout -->
+                        <a href="/checkout/store" class="btn btn-block btn-warning mt-3 text-white" type="submit" id="{{$grand[0] == '0' ? 'disabled' : '' }}">
+                            Checkout
+                        </a>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
     <script>
+
         function myCheck(){
             // get checkbox
             var checkbox = document.getElementById("check");
@@ -127,12 +135,23 @@
 
         // itung total harga
         function sum(){
-            var harga = document.getElementById('harga').value;
-            var total = document.getElementById('total').value;
-            var result = parseInt(harga) * parseInt(total);
-            if(!isNaN(result)){
-                document.getElementById('total_harga').innerHTML = result;
+            var counts = isNaN(document.getElementById('count'));
+            for(i=0; i<counts ; i++){
+                var h = 'harga' + '[' + i + ']';
+                var t = 'total' + '[' + i + ']'
+                var th = 'total_harga' + '[' + i + ']'
+                var harga = document.getElementById(h).value;
+                var total = document.getElementById(t).value;
+                var result = parseInt(harga) * parseInt(total);
+                // var results = document.getElementById('total_harga[i]').innerHTML;
+                if(!isNaN(result)){
+                    document.getElementById(th).innerHTML = result;
+                }
             }
         }
+
+        $('.buttonFinish').click(function(){
+            $('.myform').submit();
+        });
     </script>
 @endsection

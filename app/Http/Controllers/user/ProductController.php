@@ -17,11 +17,18 @@ class ProductController extends Controller
 
     public function index($id_product){
         $id_user = Auth::id();
+        // detail product, get price
+        $h = DB::table('products')
+                ->select('price')
+                ->where('id_product', $id_product)
+                ->get();
+        $harga = $h->toArray();
         // insert data
         DB::table('carts')->insert([
             'id_user' => $id_user,
             'id_product' => $id_product,
-            'total' => '1'
+            'total_item' => '1',
+            'total_harga' => $harga[0]->price
         ]);
         return redirect('/detail'.'/'. $id_product)->with('alert','Produk berhasil ditambahkan !');
         // return redirect('/user');

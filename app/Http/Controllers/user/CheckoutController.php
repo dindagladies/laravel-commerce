@@ -26,8 +26,7 @@ class CheckoutController extends Controller
         // data jenis pembayaran
         $payments= DB::table('payments')->get();
         // data checkout
-        $checkouts = DB::table('product_choosed')
-                    ->join('checkouts', 'product_choosed.id_checkout', '=', 'checkouts.id_checkout')
+        $checkouts = DB::table('checkouts')
                     ->where('checkouts.id_user', $id_user)
                     ->where('checkouts.status', "pending")
                     ->get();
@@ -44,27 +43,33 @@ class CheckoutController extends Controller
     }
 
     // store data checkout
-    public function store(Request $request){
-        // declare data
+    public function store(){
+        // get id_user
         $id_user = Auth::id();
-        $date = date('Y-m-d H:i:s');
-        $id_product = $request->id_product;
+        // get cart data
+        $cart = DB::table('carts')
+                ->where('id_user', $id_user)
+                ->get();
+        // get total grand total
+        $grand_total = DB::table('carts')->sum('total_harga');
         // add data to chekout
         DB::table('checkouts')->insert([
             'id_user' => $id_user,
+            'grand_total' => $grand_total,
             'status' => "pending"
         ]);
         $id_checkout = DB::getPdo()->lastInsertId();;
         // === store data to product choosed ===
-        // foreach($id_product as $id){
+        foreach($cart as $c){
             // get data product
             $d = DB::table('products')
-                    ->where('id_product', $id_product)
+                    ->where('id_product', $c->id_product)
                     ->join('categories', 'products.id_category', '=', 'categories.id_category')
                     ->get();
             // add
             $data = $d->toArray();
             $product = $data[0];
+            // insert to product choosed
             DB::table('product_choosed')->insert([
                 // 'id_product' => $id,
                 'id_checkout' => $id_checkout,
@@ -72,15 +77,16 @@ class CheckoutController extends Controller
                 'product_name' => $product->product_name,
                 'price' => $product->price,
                 'img_path' => $product->img_path,
-                'total' => $request->total
+                'total_item' => $c->total_item,
+                'total_harga' => $c->total_harga
             ]);
-        // }
-        // =======================================
-        // delete data in chart
-        DB::table('carts')
-            ->where('id_product', $id_product)
+            // delete data in chart
+            DB::table('carts')
+            ->where('id_product', $c->id_product)
             ->where('id_user', $id_user)
             ->delete();
+        }
+        // =======================================
         // redirect to index
         return redirect('/checkout');
     }
@@ -108,6 +114,7 @@ class CheckoutController extends Controller
     public function proses(Request $request){
         $id_user = Auth::id();
         $id_checkout = $request->id_checkout;
+        // var_dump($request->id_payment);die();
         // update data checkout
         DB::table('checkouts')
             ->where('id_checkout', $id_checkout)
