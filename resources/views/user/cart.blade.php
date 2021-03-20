@@ -59,33 +59,28 @@
                 </div>
                 @endforelse
                 <!-- ==== pemesanan =======-->
-                    <!-- <hr>
-                    <h3 class="text-left">Opsi Pengiriman</h3>
-                    <h6 class="text-left">Silahkan pilih salah satu jenis pengiriman yang Anda inginkan</h6>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header bg-primary text-white">
-                                    Reguler
-                                </div>
-                                <div class="card-body text-left">
-                                    <input type="radio" name="pengiriman" value="">
-                                    J&T Expres (Rp.10.000)
-                                </div>
+                <hr>
+        <form action="/checkout/store" method="post">
+                {{ csrf_field() }}
+                <h5 class="text-left">Opsi Pengiriman</h5>
+                <h6 class="text-danger text-left">SilahkaSilahkan pilih salah satu jenis pengiriman yang Anda inginkan</h6>
+                <div class="row">
+                    @foreach($services as $s)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                {{$s->category}}
+                                <!-- Reguler -->
+                            </div> 
+                            <div class="card-body text-left">
+                                <input type="radio" name="id_service" id="id_service" value="{{$s->id_service}}">
+                                {{$s->service_name}} ({{$s->price}})
+                                <!-- J&T Expres (Rp.10.000) -->
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header bg-danger text-white">
-                                    Instant
-                                </div>
-                                <div class="card-body text-left">
-                                    <input type="radio" name="pengiriman" value="">
-                                    Shopee (Rp.100.000)
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                    </div>
+                    @endforeach
+                </div>
                 <!-- ==== pemesanan =======-->
             </div>
             <!-- ringkasan pemersanan -->
@@ -96,7 +91,7 @@
                         <!-- total -->
                         <div class="row">
                             <div class="col-md-6">
-                                <p class="card-text text-left"><b>Total</b></p>
+                                <p class="card-text text-left"><b>Total Belanja</b></p>
                             </div>
                             <div class="col-md-6">
                                 <p class="card-text text-right" id="text">
@@ -107,13 +102,14 @@
                             </div>
                         </div>
                         <!-- checkout -->
-                        <a href="/checkout/store" class="btn btn-block btn-warning mt-3 text-white" type="submit" id="{{$grand[0] == '0' ? 'disabled' : '' }}">
+                        <button class="btn btn-block btn-warning mt-3 text-white" type="submit" id="{{$grand[0] == '0' ? 'disabled' : '' }}">
                             Checkout
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <script>
 

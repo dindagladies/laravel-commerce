@@ -28,11 +28,15 @@ class CartController extends Controller
         // get total grand total
         $grands = DB::table('carts')->sum('total_harga');
         $grand = array($grands);
+        // get data delivery services
+        $services = DB::table('delivery_services')->get();
+        // var_dump($services);die();
         // var_dump($grands);die();
         // return view & data
         return view('user/cart', [
             'carts' => $carts,
             'products' => $products,
+            'services' => $services,
             'grand' => $grand
         ]);
     }

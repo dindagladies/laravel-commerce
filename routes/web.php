@@ -42,7 +42,7 @@ Route::get('/product/{id}', 'user\ProductController@index'); //add product
 Route::get('/cart/delete/{id}', 'user\CartController@delete');
 // checkout
 Route::get('/checkout', 'user\CheckoutController@index');
-Route::get('/checkout/store', 'user\CheckoutController@store');
+Route::post('/checkout/store', 'user\CheckoutController@store');
 Route::post('/checkout/address', 'user\CheckoutController@address');
 Route::post('/checkout/proses', 'user\CheckoutController@proses');
 // Admin

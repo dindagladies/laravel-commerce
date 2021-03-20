@@ -27,23 +27,21 @@ class CheckoutController extends Controller
         $payments= DB::table('payments')->get();
         // data checkout
         $checkouts = DB::table('checkouts')
+                    ->join('delivery_services', 'checkouts.id_service', '=', 'delivery_services.id_service')
                     ->where('checkouts.id_user', $id_user)
                     ->where('checkouts.status', "pending")
                     ->get();
-        // get data delivery services
-        $services = DB::table('delivery_services')->get();
         // return $checkout;
         // return view('/user/checkout', ['checkouts' => $checkouts],['payments' => $payments], ['address' => $address]);
         return view('/user/checkout', [
             'checkouts' => $checkouts, 
             'address' => $address,
-            'payments' => $payments,
-            'services' => $services
+            'payments' => $payments
         ]);
     }
 
     // store data checkout
-    public function store(){
+    public function store(Request $request){
         // get id_user
         $id_user = Auth::id();
         // get cart data
@@ -55,6 +53,7 @@ class CheckoutController extends Controller
         // add data to chekout
         DB::table('checkouts')->insert([
             'id_user' => $id_user,
+            'id_service' => $request->id_service,
             'grand_total' => $grand_total,
             'status' => "pending"
         ]);
@@ -122,7 +121,6 @@ class CheckoutController extends Controller
             ->update([
                 'date' => date('Y-m-d'),
                 'id_address' => $request->id_address,
-                'id_service' => $request->id_service,
                 'id_payment' => $request->id_payment,
                 'status' => "process"
         ]);

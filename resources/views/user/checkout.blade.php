@@ -59,28 +59,6 @@
                         </div>
                         @endforeach
                     </div>
-                    <!-- ==== pemesanan =======-->
-                    <hr>
-                    <h5 class="text-left">Opsi Pengiriman</h5>
-                    <h6 class="text-danger text-left">SilahkaSilahkan pilih salah satu jenis pengiriman yang Anda inginkan</h6>
-                    <div class="row">
-                        @foreach($services as $s)
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header bg-primary text-white">
-                                    {{$s->category}}
-                                    <!-- Reguler -->
-                                </div> 
-                                <div class="card-body text-left">
-                                    <input type="radio" name="id_service" <?php if (isset($c) && $s=="{{$c->id_service}}") echo "checked";?> value="{{$s->id_service}}">
-                                    {{$s->service_name}} ({{$s->price}})
-                                    <!-- J&T Expres (Rp.10.000) -->
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                    <!-- ==== pemesanan =======-->
                 </div>
                 <!-- ringkasan pemersanan -->
                 <div class="col-md-4">
@@ -94,7 +72,7 @@
                                     <p class="card-text text-left">Total</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text text-right">{{$c->grand_total}}</p>
+                                    <p class="card-text text-right" id="total">{{$c->grand_total}}</p>
                                 </div>
                             </div>
                             <!-- biaya admin -->
@@ -103,7 +81,7 @@
                                     <p class="card-text text-left">Biaya Admin</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text text-right">1000</p>
+                                    <p class="card-text text-right" id="admin">100</p>
                                 </div>
                             </div>
                             <!-- biaya pengiriman -->
@@ -113,7 +91,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p class="card-text text-right" id="pengiriman">
-                                        0
+                                        {{$c->service_price}}
                                     </p>
                                 </div>
                             </div>
@@ -124,7 +102,7 @@
                                     <p class="card-text text-left"><b>Grand Total</b></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="card-text text-right">Rp. {{$c->grand_total}}</p>
+                                    <p class="card-text text-right">Rp. <span id="grand">0</span></p>
                                 </div>
                             </div>
                             <!-- checkout -->
@@ -173,4 +151,14 @@
             </div>
         </div>
     </div>
+    <script>
+        var total = $('#total').text();
+        var admin = $('#admin').text();
+        var pengiriman = $('#pengiriman').text();
+        var result = parseInt(total) + parseInt(admin) + parseInt(pengiriman);
+        if(!isNaN(result)){
+            document.getElementById('grand').innerHTML = result;
+        }
+        console.log(result);
+    </script>
 @endsection
