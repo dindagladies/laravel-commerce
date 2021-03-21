@@ -18,20 +18,30 @@
                     <div class="row ml-3 mt-3">
                         <h6 class>Profile</h6>
                     </div>
+                    @if(count($errors) > 0)
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                            {{ $error }} <br/>
+                            @endforeach
+                        </div>
+                    @endif
+                    @foreach($users as $u)
                     <div class="row ml-1">
                         <div class="col-md-3">
                             <img src="https://ganda.my.id/static/media/blank.e7647962.png" class="img-thumbnail mb-1" alt="">
+                            <img src="{{ url('/data_file/'.$u->img_profile) }}" class="img-thumbnail mb-1" alt="">
                         </div>
                         <div class="col-md-9 text-left">
-                            <p>Dinda</p>
-                            <p>Telp : 000</p>
-                            <p>Email : dinda@gmail.com</p>
+                            <p>Nama : {{$u->name}}</p>
+                            <p>Telp : {{$u->phone}}</p>
+                            <p>Email : {{ Auth::user()->email }}</p>
                             <div class="row ml-1">
                                 <button class="btn btn-sm btn-warning text-white mr-3" type="submit" data-toggle="modal" data-target="#profileModal">Ubah Data Profile</button>
                                 <button class="btn btn-sm btn-danger text-white mr-3">Ganti Pasword</button>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -46,7 +56,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/user/profile_proses" method="post">
+                <form action="/user/profile_proses" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         @foreach($users as $u)
                         {{ csrf_field() }}
@@ -58,6 +68,10 @@
                             <div class="col">
                                 <label>Nomor HP</label>
                                 <input type="text" name="phone" class="form-control" placeholder="Nomor HP" value="{{$u->phone}}">
+                            </div>
+                            <div class="col">
+                                <label>Ubah Foto Profile</label>
+                                <input type="file" name="file" class="form-control">
                             </div>
                         </div>
                         @endforeach

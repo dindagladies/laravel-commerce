@@ -35,12 +35,28 @@ class UserController extends Controller
 
     // update data profile
     public function profile_proses(Request $request){
+        $this->validate($request, [
+            'file' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'name' => 'required',
+            'phone' => 'required'
+        ]);
+
+        // menyimpan data yang diupload ke variabel file
+        $file = $request->file('file');
+        $nama_file = time()."_".$file->getClientOriginalName();
+
+        // tujuan file
+        $tujuan_upload = 'data_file';
+        $file->move($tujuan_upload, $nama_file);
+
+        // insert to database
         $id_user = Auth::id();
         DB::table('user_datas')
             ->where('id_user', $id_user)
             ->update([
                 'name' => $request->name,
-                'phone' => $request->phone
+                'phone' => $request->phone,
+                'img_profile' => $nama_file
             ]);
         // redirect
         return redirect('/user/profile')->with('alert','Data berhasil disimpan !');
