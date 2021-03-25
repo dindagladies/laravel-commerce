@@ -15,7 +15,7 @@
             </div>
             <div class="col-10">
                 <div class="card">
-                    <div class="row ml-3 mt-3">
+                    <div class="row m-3">
                         <h6 class>Profile</h6>
                     </div>
                     @if(count($errors) > 0)
@@ -28,14 +28,14 @@
                     @foreach($users as $u)
                     <div class="row ml-1">
                         <div class="col-md-3">
-                            <img src="https://ganda.my.id/static/media/blank.e7647962.png" class="img-thumbnail mb-1" alt="">
+                            <!-- <img src="https://ganda.my.id/static/media/blank.e7647962.png" class="img-thumbnail mb-1" alt=""> -->
                             <img src="{{ url('/data_file/'.$u->img_profile) }}" class="img-thumbnail mb-1" alt="">
                         </div>
                         <div class="col-md-9 text-left">
                             <p>Nama : {{$u->name}}</p>
                             <p>Telp : {{$u->phone}}</p>
                             <p>Email : {{ Auth::user()->email }}</p>
-                            <div class="row ml-1">
+                            <div class="row m-2">
                                 <button class="btn btn-sm btn-warning text-white mr-3" type="submit" data-toggle="modal" data-target="#profileModal">Ubah Data Profile</button>
                                 <button class="btn btn-sm btn-danger text-white mr-3">Ganti Pasword</button>
                             </div>
