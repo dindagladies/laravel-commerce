@@ -29,6 +29,7 @@ Route::get('/', 'user\IndexController@index');
 Route::get('/user', 'user\IndexController@index');
 Route::get('/user/profile', 'user\UserController@profile');
 Route::post('/user/profile_proses', 'user\UserController@profile_proses');
+Route::post('/user/change_password', 'user\UserController@change_password');
 Route::get('/user/order_history', 'user\UserController@order_history');
 Route::get('/user/address', 'user\UserController@address');
 Route::get('/user/product_favorite', 'user\UserController@product_favorite');

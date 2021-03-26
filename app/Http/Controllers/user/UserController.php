@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 // auth
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -60,6 +61,34 @@ class UserController extends Controller
             ]);
         // redirect
         return redirect('/user/profile')->with('alert','Data berhasil disimpan !');
+    }
+
+    // change password
+    public function change_password(Request $request){
+        // var_dump(Hash::check($request->old_pass, Auth::user()->password));
+        // die();
+        if(!(Hash::check($request->old_pass, Auth::user()->password))){
+            // matches the password
+            return redirect()->back()->with('error', 'Password salah, silahkan coba lagi.');
+        }
+
+        if(strcmp($request->old_pass, $request->new_pass) == 0){
+            // if old password same with new password
+            return redirect()->back()->with('error', 'Password baru tidak bisa sama dengan password yang lama.');
+        }
+        $validatedData = $this->validate($request, [
+            // 'old_pass' => 'required',
+            'new_pass' => 'required|string|min:6|confirmed',
+            'conf_pass' => 'required|string|min:6|confirmed',
+        ]);
+
+        // change password
+        $user = Auth::user();
+        $user->password = bcrypt($request->new_pass);
+        $user->save();
+
+        // return
+        return redirect()->back()->with("success", "Password berhasil dirubah!");
     }
 
     /*
