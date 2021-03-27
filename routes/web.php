@@ -31,7 +31,11 @@ Route::get('/user/profile', 'user\UserController@profile');
 Route::post('/user/profile_proses', 'user\UserController@profile_proses');
 Route::post('/user/change_password', 'user\UserController@change_password');
 Route::get('/user/order_history', 'user\UserController@order_history');
+// address
 Route::get('/user/address', 'user\UserController@address');
+Route::post('/user/store_address', 'user\UserController@store_address');
+Route::get('/user/edit_address/{id}', 'user\UserController@edit_address');
+// product favorite
 Route::get('/user/product_favorite', 'user\UserController@product_favorite');
 Route::get('/cart', 'user\CartController@index');
 Route::post('/cart/change_total', 'user\CartController@change_total');

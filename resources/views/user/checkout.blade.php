@@ -151,6 +151,7 @@
             </div>
         </div>
     </div>
+    <!-- Script -->
     <script>
         var total = $('#total').text();
         var admin = $('#admin').text();

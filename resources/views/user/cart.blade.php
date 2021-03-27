@@ -74,7 +74,7 @@
                             </div> 
                             <div class="card-body text-left">
                                 <input type="radio" name="id_service" id="id_service" value="{{$s->id_service}}">
-                                {{$s->service_name}} ({{$s->price}})
+                                {{$s->service_name}} ({{$s->service_price}})
                                 <!-- J&T Expres (Rp.10.000) -->
                             </div>
                         </div>

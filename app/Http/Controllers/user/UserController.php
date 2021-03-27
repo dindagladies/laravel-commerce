@@ -77,9 +77,9 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Password baru tidak bisa sama dengan password yang lama.');
         }
         $validatedData = $this->validate($request, [
-            // 'old_pass' => 'required',
-            'new_pass' => 'required|string|min:6|confirmed',
-            'conf_pass' => 'required|string|min:6|confirmed',
+            'old_pass' => 'required',
+            'new_pass' => 'required',
+            // 'conf_pass' => 'required|string|min:6|confirmed',
         ]);
 
         // change password
@@ -120,7 +120,45 @@ class UserController extends Controller
                     ->where('id_user', $id_user)
                     ->get();
         // redirect to page
-        return view('user/address', ['address', $address]);
+        return view('user/address', ['address' => $address]);
+    }
+
+    // store address
+    public function store_address(Request $request){
+        $id_user = Auth::id();
+        // save address
+        DB::table('address')->insert([
+            'id_user' => $id_user,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address
+        ]);
+        // redirect
+        return redirect('user/address')->with('alert','Data alamat telah ditambahkan.');
+    }
+
+    // detail address / edit
+    public function edit_address($id){
+        DB::table('address')->where('id_address', $id)->get();
+        // console.log($id);
+        return response()->json(['success' => true]);
+    }
+
+    // edit address
+    public function update_address(Request $request){
+        // id user
+        $id_user = Auth::id();
+        // update
+        DB::table('address')
+            ->where('id_address', $request->id_address)
+            ->where('id_user', $id_user)
+            ->update([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address
+            ]);
+        // redirect
+        return redirect('user/address')->with('alert','Data alamat berhasil dirubah.');
     }
 
     /*
